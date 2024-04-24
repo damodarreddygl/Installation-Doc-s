@@ -1,0 +1,97 @@
+https://docs.google.com/document/d/19qTxu2iTsnxsCbmi4SVnQwmWQg9KOezvRpr-Y9hnJd8/edit?usp=sharing
+############# STEPS TO INSTALL GRAFANA IN UBUNTU LINUX ############
+
+1. To install required packages and download the Grafana repository signing key, run the following commands:
+	-> sudo apt-get install -y apt-transport-https
+	-> sudo apt-get install -y software-properties-common wget
+	-> sudo wget -q -O /usr/share/keyrings/grafana.key https://apt.grafana.com/gpg.key
+
+2. To add a repository for stable releases, run the following command:
+	-> echo "deb [signed-by=/usr/share/keyrings/grafana.key] https://apt.grafana.com stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+
+3. After you add the repository, run the following commands to install the OSS or Enterprise release:
+	# Update the list of available packages
+	-> sudo apt-get update
+
+	# Install the latest OSS release:
+	-> sudo apt-get install grafana
+
+4. To start the service, run the following commands:
+	-> sudo systemctl daemon-reload
+	-> sudo systemctl start grafana-server
+	-> sudo systemctl status grafana-server
+
+5. Access Grafana in browser (e.g -> http://<your-server-ip>:3000) Grafana Default port is 3000.
+6. Login Id & Password -> admin & admin
+7. Give New-Password -> As Per Your Requirment
+----------------------------------------------------------------------------------------------------
+
+=> Steps to change logo of grafana
+	-> Move to the location (/usr/share/grafana/public/img) search for fav32.png using (ls | grep fav32.png)
+	-> Remove the image (rm fav32.png)
+	-> upload our logo in the mention location (/usr/share/grafana/public/img) using same name (fav32.png).
+	-> Move to the location (/usr/share/grafana/public/img) search for fav32.png using (ls | grep grafana_icon.svg)
+	-> Remove the image (rm grafana_icon.svg)
+	-> upload our logo in the mention location (/usr/share/grafana/public/img) using same name (grafana_icon.svg).
+
+*********************************** Steps to Bypass login credentials to Grafana Reports and Some disable options ************************************ 
+[auth.proxy]
+enabled = true
+header_name = X-WEBAUTH-USER
+header_property = username
+
+[auth.anonymous]
+# enable anonymous access
+enabled = true
+
+# specify organization name that should be used for unauthenticated users
+org_name = Main Org.
+
+# specify role for unauthenticated users
+org_role = Viewer
+
+# mask the Grafana version number for unauthenticated users
+hide_version = true
+
+[auth]
+# Set to true to disable (hide) the login form, useful if you use OAuth
+disable_login_form = true
+
+[security]
+# set to true if you want to allow browsers to render Grafana in a <frame>, <iframe>, <embed> or <object>. default is false.
+allow_embedding = true
+      
+# Default UI theme ("dark" or "light")
+default_theme = light
+
+# Editors can administrate dashboard, folders and teams they create
+editors_can_admin = true
+
+[auth]
+# Login cookie name
+login_cookie_name = Fascia_session
+
+[explore]
+# Enable the Explore section
+enabled = false
+
+[help]
+# Enable the Help section
+enabled = false
+
+[profile]
+# Enable the Profile section
+enabled = flase
+
+[auth.basic]
+enabled = false
+
+------------------------
+Copy the url of customized dashboard home page (Welcome to Fascia) click on share icon copy url
+go to putty open grafana.ini file and modify in users with copied link.
+
+
+
+
+
+
