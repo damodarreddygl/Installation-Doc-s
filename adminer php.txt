@@ -1,0 +1,61 @@
+To install Adminer (phpMinAdmin) on Ubuntu 18.04, you can follow these steps:
+
+Prerequisites:
+1. Ensure that you have PHP installed. We can install it with the following command if not already installed:
+
+   sudo apt update
+   sudo apt install php
+
+
+2. Need a web server. Use Apache or Nginx. Here, I'll provide instructions for Apache.
+
+1. Download Adminer:
+   Adminer is a single PHP file, so we can just download it to your server. We can download the latest version from the official website 	https://www.adminer.org/#download.
+
+
+   wget https://www.adminer.org/latest.php -O /var/www/html/adminer.php
+
+
+   This command will download Adminer and save it as `adminer.php` in the `/var/www/html` directory. We can choose a different directory if we prefer.
+
+2. Configure Web Server:
+
+   If We're using Apache, We might need to enable the `rewrite` module and restart Apache:
+
+   sudo a2enmod rewrite
+   sudo systemctl restart apache2
+
+
+3. Access Adminer:
+
+   Once you've done this, We can access Adminer by visiting `http://your_server_ip/adminer.php` on web browser.
+
+4. Secure Adminer (Optional):
+
+   It's recommended to secure Adminer with a login mechanism, especially if it's exposed to the internet. We can set up basic authentication using Apache's `.htaccess` file.
+
+   Create an `.htaccess` file in the same directory as `adminer.php`:
+
+	sudo nano /var/www/html/.htaccess
+
+   AuthType Basic
+   AuthName "Restricted Access"
+   AuthUserFile /etc/apache2/.htpasswd
+   Require valid-user
+
+
+   Create the `.htpasswd` file to store usernames and passwords:
+
+   sudo htpasswd -c /etc/apache2/.htpasswd user_name
+
+
+   This will prompt us to set a password for the user `adminer_user`. 
+
+   After setting up the `.htaccess` file, make sure to restart Apache:
+
+   sudo systemctl restart apache2
+
+sudo apt install php-mysql
+sudo systemctl restart apache2
+
+
